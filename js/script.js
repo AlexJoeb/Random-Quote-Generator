@@ -17,32 +17,37 @@ let quotes = [
     citation: "Dunder Mifflin Paper Company",
     year: 2005,
     color: '#74d2e7',
+    category: ["Funny"],
   },
   {
     quote: "Well, if droids could think, there’d be none of us here, would there?",
     source: "Obi-Wan Kenobi",
     citation: "Jedi Counsel",
     year: 1977,
-    color: "#009f4d"
+    color: "#009f4d",
+    category: ["Technology"],
   },
   {
     quote: "Where there’s life there’s hope.. and need of vittles.",
     source: "J.R.R. Tolkien",
     citation: "The Lord of the Rings",
     year: 2001,
-    color: "#ff9933"
+    color: "#ff9933",
+    category: ["Food"],
   },
   {
     quote: "I’m your density. I mean, your destiny.",
     source: "George McFly",
     ciation: "Back to the Future",
-    color: "#8e43e7"
+    color: "#8e43e7",
+    category: ["Wholesome"]
   },
   {
     quote: "We're all pretty bizarre. Some of us are just better at hiding it, that's all.",
     source: "Andrew Clark",
     citation: "The Breakfast Club",
     color: "#ce181e",
+    category: ["Bizzare"]
   },
 
 ];
@@ -59,18 +64,26 @@ const printQuote = () => {
   const source  = quoteObj.source || "";
   const cite    = quoteObj.citation || "";
   const year    = quoteObj.year || "";
+  const cat     = quoteObj.category || [];
 
   const html = `
     <p class="quote">${q}</p>
     <p class="source">
       ${source}${cite != "" ? `<span class="citation">${cite}</span>` : ""}
       ${year != "" ? `<span class="year">${year}</span>` : ""}
+      |
+      ${cat.length != 0 ? `<ul id="categories"></ul>` : ""}
     </p>`;
+
+  
 
   document.body.style.backgroundColor = quoteObj.color;
   reload.style.backgroundColor = quoteObj.color;
 
   quoteBox.innerHTML = html;
+  cat.forEach(c => {
+    document.getElementById("categories").innerHTML += `<li>${c}</li>`;
+  });
 }
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
