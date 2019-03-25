@@ -10,6 +10,7 @@ const citation  = document.getElementsByClassName("citation")[0];
 const year      = document.getElementsByClassName("year")[0];
 const reload    = document.getElementById("loadQuote");
 
+// List of Quotes
 let quotes = [
   {
     quote: "Bears. Beets. Battlestar Galactica.",
@@ -52,20 +53,24 @@ let quotes = [
 
 ];
 
+
+// Retrieve a random quote from the array quote array.
 const getRandomQuote = () => {
-  let rand = Math.floor((Math.random() * 5));
+  let rand = Math.floor((Math.random() * 5)); // Generate random number 1-5
   return quotes[rand];
 }
 
 const printQuote = () => {
   const quoteObj = getRandomQuote();
 
+  // Varaiables for each part of the quote.
   const q       = quoteObj.quote || "";
   const source  = quoteObj.source || "";
   const cite    = quoteObj.citation || "";
   const year    = quoteObj.year || "";
   const cat     = quoteObj.category || [];
 
+  // Quote HTML Template
   const html = `
     <p class="quote">${q}</p>
     <p class="source">
@@ -76,14 +81,17 @@ const printQuote = () => {
     </p>`;
 
   
-
+  // Changing the background color of the screen and "new quote" button.
   document.body.style.backgroundColor = quoteObj.color;
   reload.style.backgroundColor = quoteObj.color;
 
   quoteBox.innerHTML = html;
+
+  // For Each catergory, add it to the page.
   cat.forEach(c => {
     document.getElementById("categories").innerHTML += `<li>${c}</li>`;
   });
 }
 
+// Button listener for "new quote" button.
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
